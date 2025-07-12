@@ -280,25 +280,17 @@ class EmployeeDirectory {
     attachEventListeners() {
         const container = document.getElementById('employee-container');
         
-        // Remove existing listeners to prevent duplicates
-        const editBtns = container.querySelectorAll('.edit-btn');
-        const deleteBtns = container.querySelectorAll('.delete-btn');
-        
-        editBtns.forEach(btn => {
-            btn.replaceWith(btn.cloneNode(true));
-        });
-        
-        deleteBtns.forEach(btn => {
-            btn.replaceWith(btn.cloneNode(true));
-        });
-        
         // Add fresh event listeners
         container.querySelectorAll('.edit-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 const id = parseInt(btn.dataset.id);
-                this.editEmployee(id);
+                // Fix: Pass the employee object to openModal for editing
+                const employee = this.employees.find(emp => emp.id === id);
+                if (employee) {
+                    this.openModal(employee);
+                }
             });
         });
         
