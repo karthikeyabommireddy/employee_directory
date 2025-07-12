@@ -1,6 +1,6 @@
 class EmployeeDirectory {
     constructor() {
-        // Load employees from localStorage if available, else use mockEmployees
+        // Load employees from localStorage if available, else use mockEmployees . 
         const stored = localStorage.getItem('employees');
         this.employees = stored ? JSON.parse(stored) : [...mockEmployees];
         this.filteredEmployees = [...this.employees];
